@@ -1,8 +1,8 @@
 # JS Calculator App
+
 - preview
 
-
-
+![preview of js-calculator](<assets/images/Screenshot from 2026-02-18 11-47-42.png>)
 
 ## About
 
@@ -17,8 +17,6 @@ The JS Calculator App is a simple web-based calculator built using JavaScript, H
 - Delete one digit at a time.
 
 - Display the selected operator on the screen.
-
-
 
 ## How It Works
 
