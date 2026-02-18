@@ -34,7 +34,7 @@ If a new number is entered after =, the calculator automatically starts a new ca
 
 ## Built With
 
-JavaScript 
+JavaScript
 
 HTML
 
