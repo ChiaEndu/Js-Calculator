@@ -1,154 +1,128 @@
-const display = document.getElementById('display')
-const buttons = document.querySelectorAll('button')
+const display = document.getElementById("display");
+const memory = document.getElementById("memory");
+const buttons = document.querySelectorAll("button");
 
-let currentInput = '0'
-let previousInput = null
-let operator = null
-let justCalculated = false
+let currentNumber = "0";
+let expression = "";
+let resetScreen = false;
 
-function updateDisplay () {
-  if (operator && previousInput !== null && !justCalculated) {
-    display.textContent = previousInput + ' ' + operator + ' ' + currentInput
+function updateDisplay() {
+  if (expression) {
+    display.textContent = resetScreen
+      ? expression
+      : expression + currentNumber;
   } else {
-    display.textContent = currentInput
+    display.textContent = currentNumber;
   }
 }
 
-function clearCalculator () {
-  currentInput = '0'
-  previousInput = null
-  operator = null
-  justCalculated = false
-}
-
-function deleteOne () {
-  if (justCalculated) return
-
-  if (currentInput.length > 1) {
-    currentInput = currentInput.slice(0, -1)
+function inputNumber(number) {
+  if (currentNumber === "0" || resetScreen) {
+    currentNumber = number;
+    resetScreen = false;
   } else {
-    currentInput = '0'
+    currentNumber += number;
   }
 }
 
-function inputNumber (num) {
-  if (justCalculated) {
-    currentInput = num
-    previousInput = null
-    operator = null
-    justCalculated = false
-    return
+function inputDecimal() {
+  if (resetScreen) {
+    currentNumber = "0.";
+    resetScreen = false;
+    return;
   }
 
-  if (currentInput === '0') {
-    currentInput = num
+  if (!currentNumber.includes(".")) {
+    currentNumber += ".";
+  }
+}
+
+function chooseOperator(op) {
+  if (resetScreen) return;
+
+  expression += currentNumber + " " + op + " ";
+  resetScreen = true;
+}
+
+function calculate() {
+  if (!expression) return;
+
+  expression += currentNumber;
+
+  try {
+    const result = eval(expression);
+
+    memory.textContent = expression + " ";
+    currentNumber = result.toString();
+    expression = "";
+    resetScreen = true;
+
+  } catch {
+    alert("Error");
+    clearAll();
+  }
+}
+
+function clearAll() {
+  currentNumber = "0";
+  expression = "";
+  resetScreen = false;
+  memory.textContent = "";
+}
+
+function deleteOne() {
+  if (resetScreen) return;
+
+  if (currentNumber.length > 1) {
+    currentNumber = currentNumber.slice(0, -1);
   } else {
-    currentInput += num
+    currentNumber = "0";
   }
 }
 
-function inputDecimal () {
-  if (justCalculated) {
-    currentInput = '0.'
-    justCalculated = false
-    return
-  }
-
-  if (!currentInput.includes('.')) {
-    currentInput += '.'
-  }
+function percentage() {
+  currentNumber = (parseFloat(currentNumber) / 100).toString();
 }
 
-function chooseOperator (op) {
-  if (operator && !justCalculated) {
-    calculate()
-  }
-
-  previousInput = currentInput
-  operator = op
-  currentInput = '0'
-  justCalculated = false
-
-  highlightOperator(op)
+function toggleSign() {
+  if (currentNumber === "0") return;
+  currentNumber = (parseFloat(currentNumber) * -1).toString();
 }
 
-function calculate () {
-  if (!operator || previousInput === null) return
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
 
-  const prev = parseFloat(previousInput)
-  const current = parseFloat(currentInput)
+    const value = button.textContent.trim();
+    const action = button.dataset.action;
+    const op = button.dataset.operator;
 
-  let result
-
-  switch (operator) {
-    case '+':
-      result = prev + current
-      break
-    case '-':
-      result = prev - current
-      break
-    case '*':
-      result = prev * current
-      break
-    case '/':
-      result = current === 0 ? 'Error' : prev / current
-      break
-  }
-
-  currentInput = result.toString()
-  previousInput = null
-  operator = null
-  justCalculated = true
-
-  removeHighlight()
-}
-
-function toggleSign () {
-  currentInput = (parseFloat(currentInput) * -1).toString()
-}
-
-function percentage () {
-  currentInput = (parseFloat(currentInput) / 100).toString()
-}
-
-function highlightOperator (op) {
-  removeHighlight()
-  document.querySelectorAll('.btn-orange').forEach((btn) => {
-    if (btn.dataset.operator === op) {
-      btn.classList.add('active')
-    }
-  })
-}
-
-function removeHighlight () {
-  document.querySelectorAll('.btn-orange').forEach((btn) => {
-    btn.classList.remove('active')
-  })
-}
-
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const number = button.textContent
-    const action = button.dataset.action
-    const op = button.dataset.operator
-
-    if (!action && !op) {
-      if (number === '.') {
-        inputDecimal()
-      } else {
-        inputNumber(number)
-      }
+    if (!isNaN(value)) {
+      inputNumber(value);
+    } 
+    else if (value === ".") {
+      inputDecimal();
+    } 
+    else if (op) {
+      chooseOperator(op);
+    } 
+    else if (action === "equals") {
+      calculate();
+    } 
+    else if (action === "clear") {
+      clearAll();
+    } 
+    else if (action === "delete") {
+      deleteOne();
+    } 
+    else if (action === "percent") {
+      percentage();
+    } 
+    else if (action === "sign") {
+      toggleSign();
     }
 
-    if (action === 'clear') clearCalculator()
-    if (action === 'delete') deleteOne()
-    if (action === 'equals') calculate()
-    if (action === 'sign') toggleSign()
-    if (action === 'percent') percentage()
-    if (op) chooseOperator(op)
+    updateDisplay();
+  });
+});
 
-    updateDisplay()
-  })
-})
-
-updateDisplay()
+updateDisplay();

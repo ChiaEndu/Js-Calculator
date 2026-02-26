@@ -18,12 +18,20 @@ body {
 }
 
 .display {
-  color: white;
+  color: #fff;
   font-size: 3rem;
   text-align: right;
   padding: 20px;
   word-wrap: break-word;
   min-height: 80px;
+}
+
+.memory {
+  height: 20px;
+  text-align: right;
+  padding: 10px;
+  font-size: 14px;
+  color: #ffffff99;
 }
 
 .buttons {
@@ -42,7 +50,7 @@ button {
 
 .btn-dark {
   background: #333;
-  color: white;
+  color: #fff;
 }
 
 .btn-gray {
@@ -52,11 +60,11 @@ button {
 
 .btn-orange {
   background: #ff9500;
-  color: white;
+  color: #fff;
 }
 
 .btn-orange.active {
-  background: white;
+  background: #fff;
   color: #ff9500;
 }
 
