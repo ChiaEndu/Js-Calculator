@@ -1,46 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculator</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
+    <div class="calculator">
+      <div class="memory" id="memory"></div>
+      <div id="display" class="display">0</div>
 
-<div class="calculator">
-  <div class="memory" id="memory"></div>
-  <div id="display" class="display">0</div>
+      <div class="buttons">
+        <button class="btn-gray" data-action="clear">AC</button>
+        <button class="btn-gray btn-back" data-action="delete">⌫</button>
+        <button class="btn-gray" data-action="percent">%</button>
+        <button class="btn-orange" data-operator="/">÷</button>
 
-  <div class="buttons">
-    <button class="btn-gray" data-action="clear">AC</button>
-    <button class="btn-gray btn-back" data-action="delete">⌫</button>
-    <button class="btn-gray" data-action="percent">%</button>
-    <button class="btn-orange" data-operator="/">÷</button>
+        <button class="btn-dark">7</button>
+        <button class="btn-dark">8</button>
+        <button class="btn-dark">9</button>
+        <button class="btn-orange" data-operator="*">x</button>
 
-    <button class="btn-dark">7</button>
-    <button class="btn-dark">8</button>
-    <button class="btn-dark">9</button>
-    <button class="btn-orange" data-operator="*">x</button>
+        <button class="btn-dark">4</button>
+        <button class="btn-dark">5</button>
+        <button class="btn-dark">6</button>
+        <button class="btn-orange" data-operator="-">-</button>
 
-    <button class="btn-dark">4</button>
-    <button class="btn-dark">5</button>
-    <button class="btn-dark">6</button>
-    <button class="btn-orange" data-operator="-">-</button>
+        <button class="btn-dark">1</button>
+        <button class="btn-dark">2</button>
+        <button class="btn-dark">3</button>
+        <button class="btn-orange" data-operator="+">+</button>
 
-    <button class="btn-dark">1</button>
-    <button class="btn-dark">2</button>
-    <button class="btn-dark">3</button>
-    <button class="btn-orange" data-operator="+">+</button>
+        <button class="btn-gray" data-action="sign">±</button>
+        <button class="btn-dark btn-zero">0</button>
+        <button class="btn-dark">.</button>
+        <button class="btn-orange" data-action="equals">=</button>
+      </div>
+    </div>
 
-    <button class="btn-gray" data-action="sign">±</button>
-    <button class="btn-dark btn-zero">0</button>
-    <button class="btn-dark">.</button>
-    <button class="btn-orange" data-action="equals">=</button>
-  </div>
-</div>
-
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

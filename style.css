@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #000;
+  background: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,10 @@ body {
 }
 
 .calculator {
+  background: #000;
   width: 320px;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .display {
@@ -71,3 +74,4 @@ button {
 .btn-back {
   border-radius: 50%;
 }
+
