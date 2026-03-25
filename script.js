@@ -94,7 +94,12 @@ function deleteOne () {
 }
 
 function percentage () {
-  currentNumber = (parseFloat(currentNumber) / 100).toString()
+  const original = currentNumber
+  const percentValue = (parseFloat(currentNumber) / 100).toString()
+
+  memory.textContent = `${original} %`
+  currentNumber = percentValue
+  resetScreen = true
 }
 
 function toggleSign () {
