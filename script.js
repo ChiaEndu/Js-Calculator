@@ -94,14 +94,27 @@ function deleteOne () {
 }
 
 function percentage () {
-  const original = currentNumber
-  const percentValue = (parseFloat(currentNumber) / 100).toString()
+  const current = parseFloat(currentNumber)
 
-  memory.textContent = `${original} %`
-  currentNumber = percentValue
-  resetScreen = true
+  if (isNaN(current)) return
+
+  if (previousOperand !== null && operation !== null) {
+    const prev = parseFloat(previousOperand)
+
+    if (isNaN(prev)) return
+
+    const percentValue = (prev * current) / 100
+
+    currentNumber = percentValue.toString()
+    memory.textContent = `${previousOperand} ${operation} ${current}%`
+  } else {
+    
+    currentNumber = (current / 100).toString()
+    memory.textContent = `${current}%`
+  }
+
+  resetScreen = false
 }
-
 function toggleSign () {
   currentNumber = (parseFloat(currentNumber) * -1).toString()
 }
