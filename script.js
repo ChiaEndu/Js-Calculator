@@ -108,7 +108,6 @@ function percentage () {
     currentNumber = percentValue.toString()
     memory.textContent = `${previousOperand} ${operation} ${current}%`
   } else {
-    
     currentNumber = (current / 100).toString()
     memory.textContent = `${current}%`
   }
